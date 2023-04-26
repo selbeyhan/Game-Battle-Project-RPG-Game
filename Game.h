@@ -54,10 +54,11 @@ void Game::SequelOptions()
 
 void Game::LoadOldGame()
 {
-    ifstream file;
     string fileName = stringReturnPrompt("Enter File Name, Example: gamedata.txt");
-    file.open(fileName);
-    // do the checking if it opens or fails or sum
+    ifstream file(fileName);
+    // file.open(fileName);
+    //  do the checking if it opens or fails or sum
+
     int const SIZE = 7;
     int characterInfo1[SIZE];
     int characterInfo2[SIZE];
