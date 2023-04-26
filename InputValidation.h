@@ -10,19 +10,19 @@ int intReturnPrompt(string InputText, int numOptions)
     int input;
     while (true)
     {
-        cout << InputText << "\n>";
+        cout << InputText << "\n\t>";
         cin >> input;
         if (cin.fail())
         {
             cin.clear();
             cin.ignore();
-            cout << "Re-enter a valid value!\n";
+            cout << "Re-enter a valid value!\n\t";
         }
         else
         {
             if (!(input >= 1 && input <= numOptions))
             {
-                cout << "Re-enter a valid value!\n";
+                cout << "Re-enter a valid value!\n\t";
             }
             else
                 break;
@@ -36,7 +36,7 @@ string stringReturnPrompt(string InputText)
     string input;
     while (true)
     {
-        cout << InputText << "\n>";
+        cout << InputText << "\n\t>";
         cin >> input;
         if (cin.fail())
         {

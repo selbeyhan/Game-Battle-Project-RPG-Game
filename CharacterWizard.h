@@ -5,10 +5,16 @@
 class Wizard : public Character
 {
 public:
-    Wizard();
+    Wizard(string _name);
+    void attack() override;
     int kick();
     int fireball();
 };
+
+Wizard::Wizard(string _name) : Character(_name)
+{
+    type = "Wizard";
+}
 
 int Wizard::kick()
 {

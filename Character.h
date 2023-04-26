@@ -26,6 +26,7 @@ public:
     void HealthItem(int addHealth);
     void AddXp(int addXp); // think about linear (same xp for each level )or progressive (more xp for every level)
     void takeDamage(int damage);
+    virtual void attack() = 0;
 };
 
 Character::Character(string _name)
