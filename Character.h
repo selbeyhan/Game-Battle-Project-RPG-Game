@@ -6,7 +6,7 @@ using namespace std;
 
 class Character
 {
-protected:
+public:
     string type;
     bool alive = true;
     string name;
@@ -17,8 +17,7 @@ protected:
     int stamina = maxStamina;
     int XP = 0;
     int maxXP = 10;
-
-public:
+    // -----
     Character(string _name);
     virtual void printStats();
     void setCharacterName(string setName);

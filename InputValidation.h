@@ -1,5 +1,5 @@
-#ifndef INPUTVALIDATION_HPP
-#define INPUTVALIDATION_HPP
+#ifndef INPUTVALIDATION_H
+#define INPUTVALIDATION_H
 
 #include <iostream>
 #include <string>
