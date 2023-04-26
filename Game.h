@@ -9,8 +9,8 @@
 class Game
 {
 private:
-    bool run = true;
-    bool battle = false;
+    // bool run = true;
+    // bool battle = false;
     Character *players[2];
 
 public:
