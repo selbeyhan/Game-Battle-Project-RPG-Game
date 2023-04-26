@@ -5,5 +5,6 @@ using namespace std;
 int main()
 {
     // Create character
-    Wizard myCharacter;
+
+
 }
