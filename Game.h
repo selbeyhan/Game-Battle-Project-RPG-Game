@@ -15,7 +15,7 @@ private:
 
 public:
     Game();
-    void NewGame();
+    void MakeNewGame();
     void LoadOldGame();
     void BattleRun();
 };
@@ -26,7 +26,7 @@ Game::Game()
     int beginning = intReturnPrompt("1) Start New Game\n2) Load Old Game\n3) Quit Game", 3);
     if (beginning == 1)
     {
-        NewGame();
+        MakeNewGame();
     }
     if (beginning == 2)
     {
@@ -145,7 +145,7 @@ void Game::LoadOldGame()
     */
 }
 
-void Game::NewGame()
+void Game::MakeNewGame()
 {
     system("cls");
     string player1Name = stringReturnPrompt("Enter Player 1 Name");
