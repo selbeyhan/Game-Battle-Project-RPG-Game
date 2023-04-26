@@ -8,16 +8,18 @@ class Character
 {
 protected:
     string type;
-    bool dead;
+    bool alive = true;
     string name;
     int level;
-    int health;
     int maxHealth = 100;
     int maxStamina = 100;
+    int health = maxHealth;
+    int stamina = maxStamina;
     int XP = 0;
-    int maxXP;
+    int maxXP = 10;
 
 public:
+    Character(string _name);
     void setCharacterName(string setName);
     string getName();
     void Resting(int addHealth);
@@ -26,13 +28,10 @@ public:
     void takeDamage(int damage);
 };
 
-class Wizard : Character
+Character::Character(string _name)
 {
-
-public:
-    void kick();
-    void fireball();
-};
+    name = _name;
+}
 
 void Character::setCharacterName(string setName)
 {
@@ -64,18 +63,25 @@ void Character::AddXp(int addXp)
 {
     if (XP + addXp > maxXP)
     {
+        // Increase level, MaxXP, Health, MaxHealth, Stamina, MaxStamina
         level += 1;
         maxXP += 1;
         XP = (XP + addXp - maxXP);
+
         return;
     }
     XP += addXp;
 }
 void Character::takeDamage(int damage)
 {
-    if (!(health - damage > 0))
+    if (health - damage < 0)
     {
+        alive = false;
+        health = 0;
+        return;
     }
+
+    health -= damage;
 }
 
 #endif
