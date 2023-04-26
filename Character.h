@@ -10,7 +10,7 @@ protected:
     string type;
     bool alive = true;
     string name;
-    int level;
+    int level = 0;
     int maxHealth = 100;
     int maxStamina = 100;
     int health = maxHealth;
@@ -20,18 +20,28 @@ protected:
 
 public:
     Character(string _name);
+    virtual void printStats();
     void setCharacterName(string setName);
     string getName();
-    void Resting(int addHealth);
-    void HealthItem(int addHealth);
+    void Resting(int addHealth, int addStamina);
+    void HealthItem(int addHealth, int addStamina);
     void AddXp(int addXp); // think about linear (same xp for each level )or progressive (more xp for every level)
     void takeDamage(int damage);
-    virtual void attack() = 0;
+    virtual int attack() = 0;
 };
 
 Character::Character(string _name)
 {
     name = _name;
+}
+
+void Character::printStats()
+{
+    cout << name << " " << type << endl;
+    cout << "Health: " << health << "/" << maxHealth << endl;
+    cout << "Stamina: " << stamina << "/" << maxStamina << endl;
+    cout << "Level: " << level << endl;
+    cout << "XP: " << XP << "/" << maxXP << "\n\n";
 }
 
 void Character::setCharacterName(string setName)
@@ -44,7 +54,7 @@ string Character::getName()
     return name;
 }
 
-void Character::Resting(int addHealth)
+void Character::Resting(int addHealth, int addStamina)
 {
     if (health + addHealth > maxHealth)
     {
@@ -52,11 +62,17 @@ void Character::Resting(int addHealth)
         return;
     }
     health += addHealth;
+
+    if (stamina + addStamina > maxStamina)
+    {
+        stamina = maxStamina;
+    }
+    stamina += addStamina;
 }
 
-void Character::HealthItem(int addHealth)
+void Character::HealthItem(int addHealth, int addStamina)
 {
-    Resting(addHealth); // dont know if this'll work
+    Resting(addHealth, addStamina); // dont know if this'll work
 }
 
 // think about linear (same xp for each level )or progressive (more xp for every level)
