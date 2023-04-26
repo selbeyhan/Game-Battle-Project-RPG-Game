@@ -6,7 +6,6 @@ using namespace std;
 
 class Character
 {
-public:
     string type;
     bool alive = true;
     string name;
@@ -17,6 +16,8 @@ public:
     int stamina = maxStamina;
     int XP = 0;
     int maxXP = 10;
+
+public:
     // -----
     Character(string _name);
     virtual void printStats();
@@ -27,6 +28,7 @@ public:
     void AddXp(int addXp); // think about linear (same xp for each level )or progressive (more xp for every level)
     void takeDamage(int damage);
     virtual int attack() = 0;
+    // setters
 };
 
 Character::Character(string _name)

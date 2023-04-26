@@ -15,24 +15,41 @@ private:
 
 public:
     Game();
+    void SequelOptions();
     void MakeNewGame();
     void LoadOldGame();
     void BattleRun();
+    void End();
 };
 
 Game::Game()
 {
     cout << "Welcome To My RPG Game By Selman\n";
-    int beginning = intReturnPrompt("1) Start New Game\n2) Load Old Game\n3) Quit Game", 3);
-    if (beginning == 1)
+    int choice = intReturnPrompt("1) Start New Game\n2) Load Old Game\n3) Quit Game", 3);
+    if (choice == 1)
     {
         MakeNewGame();
     }
-    if (beginning == 2)
+    if (choice == 2)
     {
         LoadOldGame();
     }
     cout << "Thank you for playing!";
+}
+
+void Game::SequelOptions()
+{
+    int choice = intReturnPrompt("1) Battle\n2) Quit Game", 2);
+
+    if (choice == 1)
+    {
+        BattleRun();
+    }
+    if (choice == 2)
+    {
+        End();
+    }
+    cout << "Error";
 }
 
 void Game::LoadOldGame()
@@ -143,6 +160,10 @@ void Game::LoadOldGame()
         players[0]->maxXP = attributes2[7];
     }
     */
+    players[0]->printStats();
+    players[1]->printStats();
+
+    // SequelOptions();
 }
 
 void Game::MakeNewGame()
@@ -176,6 +197,17 @@ void Game::MakeNewGame()
         Warrior *player2 = new Warrior(player2Name);
         players[1] = player2;
     }
+}
+
+void Game::BattleRun()
+{
+    players[0]->printStats();
+    players[1]->printStats();
+}
+
+void Game::End()
+{
+    cout << "Thank you for playing!"; // add art
 }
 
 #endif
