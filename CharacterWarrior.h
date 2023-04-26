@@ -10,6 +10,7 @@ public:
     int attack() override;
     int swordSwing();
     int M4A1S();
+    void setAll(int info[]) override;
 };
 
 Warrior::Warrior(string _name) : Character(_name)
@@ -53,4 +54,14 @@ int Warrior::M4A1S()
     return -1;
 }
 
+void Warrior::setAll(int info[])
+{
+    health = info[1];
+    maxHealth = info[2];
+    stamina = info[3];
+    maxStamina = info[4];
+    level = info[5];
+    XP = info[6];
+    maxXP = info[7];
+}
 #endif

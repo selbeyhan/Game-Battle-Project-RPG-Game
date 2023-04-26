@@ -9,6 +9,7 @@ public:
     int attack() override;
     int kick();
     int fireball();
+    void setAll(int info[]) override;
 };
 
 Wizard::Wizard(string _name) : Character(_name)
@@ -51,4 +52,16 @@ int Wizard::fireball()
     }
     return -1;
 }
+
+void Wizard::setAll(int info[])
+{
+    health = info[1];
+    maxHealth = info[2];
+    stamina = info[3];
+    maxStamina = info[4];
+    level = info[5];
+    XP = info[6];
+    maxXP = info[7];
+}
+
 #endif

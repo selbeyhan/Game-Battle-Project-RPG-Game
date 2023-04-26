@@ -6,6 +6,7 @@ using namespace std;
 
 class Character
 {
+protected:
     string type;
     bool alive = true;
     string name;
@@ -29,6 +30,7 @@ public:
     void takeDamage(int damage);
     virtual int attack() = 0;
     // setters
+    virtual void setAll(int info[]) = 0;
 };
 
 Character::Character(string _name)

@@ -59,8 +59,8 @@ void Game::LoadOldGame()
     file.open(fileName);
     // do the checking if it opens or fails or sum
     int const SIZE = 7;
-    int attributes1[SIZE];
-    int attributes2[SIZE];
+    int characterInfo1[SIZE];
+    int characterInfo2[SIZE];
 
     string Name1;
     string Name2;
@@ -72,7 +72,7 @@ void Game::LoadOldGame()
     {
         file.ignore();
         file >> temp;
-        attributes1[i] = temp;
+        characterInfo1[i] = temp;
     }
 
     file >> Name2;
@@ -81,83 +81,45 @@ void Game::LoadOldGame()
     {
         file.ignore();
         file >> temp;
-        attributes2[i] = temp;
+        characterInfo2[i] = temp;
     }
     file.close();
 
     // Player 1
-    if (attributes1[0] == 1)
+    if (characterInfo1[0] == 1)
     {
         players[0] = new Wizard(Name1);
-        players[0]->health = attributes1[1];
-        players[0]->maxHealth = attributes1[2];
-        players[0]->stamina = attributes1[3];
-        players[0]->maxStamina = attributes1[4];
-        players[0]->level = attributes1[5];
-        players[0]->XP = attributes1[6];
-        players[0]->maxXP = attributes1[7];
+        players[0]->setAll(characterInfo1);
     }
-
-    if (attributes1[0] == 2)
+    if (characterInfo1[0] == 2)
     {
         players[0] = new Warrior(Name1);
-        players[0]->health = attributes1[1];
-        players[0]->maxHealth = attributes1[2];
-        players[0]->stamina = attributes1[3];
-        players[0]->maxStamina = attributes1[4];
-        players[0]->level = attributes1[5];
-        players[0]->XP = attributes1[6];
-        players[0]->maxXP = attributes1[7];
+        players[0]->setAll(characterInfo1);
     }
-
     /*
-    if (attributes1[0] == 3) {
+    if (characterInfo1[0] == 3) {
         players[0] = new Archer(Name1);
-        players[0]->health = attributes1[1];
-        players[0]->maxHealth = attributes1[2];
-        players[0]->stamina = attributes1[3];
-        players[0]->maxStamina = attributes1[4];
-        players[0]->level = attributes1[5];
-        players[0]->XP = attributes1[6];
-        players[0]->maxXP = attributes1[7];
+        players[0]->setAll(characterInfo1);
     }
     */
 
     // Player 2
-    if (attributes2[0] == 1)
+    if (characterInfo2[0] == 1)
     {
-        players[0] = new Wizard(Name1);
-        players[0]->health = attributes2[1];
-        players[0]->maxHealth = attributes2[2];
-        players[0]->stamina = attributes2[3];
-        players[0]->maxStamina = attributes2[4];
-        players[0]->level = attributes2[5];
-        players[0]->XP = attributes2[6];
-        players[0]->maxXP = attributes2[7];
+        players[1] = new Wizard(Name1);
+        players[1]->setAll(characterInfo2);
     }
 
-    if (attributes2[0] == 2)
+    if (characterInfo2[0] == 2)
     {
-        players[0] = new Warrior(Name1);
-        players[0]->health = attributes2[1];
-        players[0]->maxHealth = attributes2[2];
-        players[0]->stamina = attributes2[3];
-        players[0]->maxStamina = attributes2[4];
-        players[0]->level = attributes2[5];
-        players[0]->XP = attributes2[6];
-        players[0]->maxXP = attributes2[7];
+        players[1] = new Warrior(Name1);
+        players[1]->setAll(characterInfo2);
     }
 
     /*
-    if (attributes2[0] == 3) {
-        players[0] = new Archer(Name1);
-        players[0]->health = attributes2[1];
-        players[0]->maxHealth = attributes2[2];
-        players[0]->stamina = attributes2[3];
-        players[0]->maxStamina = attributes2[4];
-        players[0]->level = attributes2[5];
-        players[0]->XP = attributes2[6];
-        players[0]->maxXP = attributes2[7];
+    if (characterInfo2[0] == 3) {
+        players[1] = new Archer(Name1);
+        players[1]->setAll(characterInfo2);
     }
     */
     players[0]->printStats();
