@@ -47,7 +47,7 @@ Game::Game()
 
 void Game::SequelOptions()
 {
-    int choice = intReturnPrompt("1) Battle\n2) Quit Game", 2);
+    int choice = intReturnPrompt("1) Battle\n2)Quit And Save Game \n3)Quit Game", 3);
 
     if (choice == 1)
     {
@@ -138,10 +138,7 @@ void Game::LoadOldGame()
     }
     */
 
-    cout << "Load Successful, previous game stats\n\n";
-    players[0]->printStats();
-    players[1]->printStats();
-
+    cout << "Load Successful\n\n";
     SequelOptions();
 }
 
