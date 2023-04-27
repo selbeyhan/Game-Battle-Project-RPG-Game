@@ -181,6 +181,18 @@ void Game::BattleRun()
     players[1]->printStats();
 }
 
+void Game::saveGame()
+{
+    string saveLocation = "GameData.txt";
+    int autoSave = intReturnPrompt("1) Auto Save (Destination: \\" + saveLocation + "))\n2) Custom Save", 2);
+    if (autoSave == 2)
+    {
+        string saveLocation = stringReturnPrompt("Custom Save File Name (include .txt)");
+    }
+
+    //start saving 
+}
+
 void Game::End()
 {
     // for (int i = 0; i < 2; i++)
