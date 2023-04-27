@@ -4,13 +4,13 @@ Health: 50
 MaxHealth: 100
 Stamina: 80
 MaxStamina: 100
-crit = 0;
-maxCrit = 10;
+crit: 0
+maxCrit: 10
 Name: Ahmet
 Type: 2
 Health: 70
 MaxHealth: 100
 Stamina: 90
 MaxStamina: 100
-crit = 0;
-maxCrit = 10;
+crit: 0
+maxCrit: 10

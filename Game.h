@@ -19,13 +19,14 @@ public:
     void MakeNewGame();
     void LoadOldGame();
     void BattleRun();
+    void saveGame();
     void End();
 };
 
 Game::Game()
 {
     cout << "Welcome To My RPG Game By Selman\n";
-    int choice = intReturnPrompt("1) Start New Game\n2) Load Old Game\n3) Quit Game", 3);
+    int choice = intReturnPrompt("1) Start New Game\n2) Load Old Game\n3)Quit And Save Game \n4)Quit Game", 4);
     if (choice == 1)
     {
         MakeNewGame();
@@ -34,7 +35,14 @@ Game::Game()
     {
         LoadOldGame();
     }
-    cout << "Thank you for playing!";
+    if (choice == 3)
+    {
+        saveGame();
+    }
+    if (choice == 4)
+    {
+        End();
+    }
 }
 
 void Game::SequelOptions()
@@ -54,10 +62,15 @@ void Game::SequelOptions()
 
 void Game::LoadOldGame()
 {
-    string fileName = stringReturnPrompt("Enter File Name, Example: gamedata.txt");
+    string fileName = stringReturnPrompt("Enter File Name");
     ifstream file(fileName);
-    // file.open(fileName);
+
     //  do the checking if it opens or fails or sum
+    if (!file.is_open())
+    {
+        cout << "File Counldn't Be Opened\n";
+        return;
+    }
 
     int const SIZE = 7;
     int characterInfo1[SIZE];
@@ -65,20 +78,25 @@ void Game::LoadOldGame()
 
     string Name1;
     string Name2;
+    string skip;
     int temp;
 
+    file >> skip;
     file >> Name1;
 
     for (unsigned int i = 0; i < SIZE; i++)
     {
+        file >> skip;
         file >> temp;
         characterInfo1[i] = temp;
     }
 
+    file >> skip;
     file >> Name2;
 
     for (unsigned int i = 0; i < SIZE; i++)
     {
+        file >> skip;
         file >> temp;
         characterInfo2[i] = temp;
     }
@@ -105,26 +123,26 @@ void Game::LoadOldGame()
     // Player 2
     if (characterInfo2[0] == 1)
     {
-        players[1] = new Wizard(Name1);
+        players[1] = new Wizard(Name2);
         players[1]->setAll(characterInfo2);
     }
-
     if (characterInfo2[0] == 2)
     {
-        players[1] = new Warrior(Name1);
+        players[1] = new Warrior(Name2);
         players[1]->setAll(characterInfo2);
     }
-
     /*
     if (characterInfo2[0] == 3) {
         players[1] = new Archer(Name1);
         players[1]->setAll(characterInfo2);
     }
     */
+
+    cout << "Load Successful, previous game stats\n\n";
     players[0]->printStats();
     players[1]->printStats();
 
-    // SequelOptions();
+    SequelOptions();
 }
 
 void Game::MakeNewGame()

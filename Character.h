@@ -10,9 +10,9 @@ protected:
     string type;
     bool alive;
     string name;
-    int maxHealth = 100;
-    int maxStamina = 100;
-    int maxCrit = 10;
+    int maxHealth;
+    int maxStamina;
+    int maxCrit;
     int health;
     int stamina;
     int crit;
@@ -37,18 +37,18 @@ Character::Character(string _name)
     alive = true;
     maxHealth = 100;
     maxStamina = 100;
-    maxCrit = 10;
     health = maxHealth;
     stamina = maxStamina;
     crit = 0;
+    maxCrit = 10;
 }
 
 void Character::printStats()
 {
-    cout << name << " " << type << endl;
+    cout << name << " (" << type << ")" << endl;
     cout << "Health: " << health << "/" << maxHealth << endl;
     cout << "Stamina: " << stamina << "/" << maxStamina << endl;
-    cout << "Crit: " << crit << "/" << maxCrit << endl;
+    cout << "Crit: " << crit << "/" << maxCrit << "\n\n";
 }
 
 void Character::setCharacterName(string setName)
