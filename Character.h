@@ -1,5 +1,6 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
+#include <iostream>
 #include <string>
 #include "InputValidation.h"
 using namespace std;
@@ -27,6 +28,7 @@ public:
     void addCrit(int _crit);
     void removeCrit(int _crit);
     void takeDamage(int damage);
+    bool isAlive() { return alive; };
     virtual int attack() = 0;
     virtual void setAll(int info[]);
 };
@@ -105,7 +107,7 @@ void Character::removeCrit(int _crit)
 
 void Character::takeDamage(int damage)
 {
-    if (health - damage < 0)
+    if (health - damage <= 0)
     {
         alive = false;
         health = 0;

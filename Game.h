@@ -1,11 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
+#include <iostream>
+#include <string>
 #include <fstream>
 #include "InputValidation.h"
 #include "Character.h"
 #include "CharacterWarrior.h"
 #include "CharacterWizard.h"
-
+using namespace std;
 class Game
 {
 private:
@@ -26,7 +28,7 @@ public:
 Game::Game()
 {
     cout << "Welcome To My RPG Game By Selman\n";
-    int choice = intReturnPrompt("1) Start New Game\n2) Load Old Game\n3)Quit And Save Game \n4)Quit Game", 4);
+    int choice = intReturnPrompt(" 1) Start New Game\n 2) Load Old Game\n 3) Quit And Save Game \n 4) Quit Game", 4);
     if (choice == 1)
     {
         MakeNewGame();
@@ -47,7 +49,7 @@ Game::Game()
 
 void Game::SequelOptions()
 {
-    int choice = intReturnPrompt("1) Battle\n2)Quit And Save Game \n3)Quit Game", 3);
+    int choice = intReturnPrompt(" 1) Battle\n 2) Quit And Save Game \n 3) Quit Game", 3);
 
     if (choice == 1)
     {
@@ -57,7 +59,6 @@ void Game::SequelOptions()
     {
         End();
     }
-    cout << "Error";
 }
 
 void Game::LoadOldGame()
@@ -138,19 +139,20 @@ void Game::LoadOldGame()
     }
     */
 
-    cout << "Load Successful\n\n";
+    cout << "Load Successful\n\n"
+         << Name1 << " vs. " << Name2;
     SequelOptions();
 }
 
 void Game::MakeNewGame()
 {
-    system("cls");
+    system("clear");
     string player1Name = stringReturnPrompt("Enter Player 1 Name");
     string player2Name = stringReturnPrompt("Enter Player 2 Name");
     int player1Choice = intReturnPrompt("Select A Character For " + player1Name + " \n1) Wizard\n2) Warrior\n3) Archer", 3);
-    system("cls");
+    system("clear");
     int player2Choice = intReturnPrompt("Select A Character For " + player2Name + " \n1) Wizard\n2) Warrior\n3) Archer", 3);
-    system("cls");
+    system("clear");
 
     if (player1Choice == 1)
     {
@@ -173,12 +175,31 @@ void Game::MakeNewGame()
         Warrior *player2 = new Warrior(player2Name);
         players[1] = player2;
     }
+
+    SequelOptions();
 }
 
 void Game::BattleRun()
 {
-    players[0]->printStats();
-    players[1]->printStats();
+    int damage;
+    while (players[0]->isAlive() && players[1]->isAlive())
+    {
+        system("clear");
+        players[0]->printStats();
+        players[1]->printStats();
+
+        damage = players[0]->attack();
+        if (damage >= 0)
+        {
+            players[1]->takeDamage(damage);
+        }
+
+        damage = players[1]->attack();
+        if (damage >= 0)
+        {
+            players[0]->takeDamage(damage);
+        }
+    }
 }
 
 void Game::saveGame()
@@ -190,7 +211,7 @@ void Game::saveGame()
         string saveLocation = stringReturnPrompt("Custom Save File Name (include .txt)");
     }
 
-    //start saving 
+    // start saving
 }
 
 void Game::End()

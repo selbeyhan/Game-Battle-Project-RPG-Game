@@ -10,7 +10,7 @@ int intReturnPrompt(string InputText, int numOptions)
     int input;
     while (true)
     {
-        cout << InputText << "\n\t>";
+        cout << InputText << "\n\t> ";
         cin >> input;
         if (cin.fail())
         {
@@ -36,7 +36,7 @@ string stringReturnPrompt(string InputText)
     string input;
     while (true)
     {
-        cout << InputText << "\n\t>";
+        cout << InputText << "\n\t> ";
         cin >> input;
         if (cin.fail())
         {

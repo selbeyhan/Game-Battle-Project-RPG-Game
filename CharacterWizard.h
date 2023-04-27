@@ -1,5 +1,8 @@
-#ifndef CHARCTERWIZARD_H
-#define CHARCTERWIZARD_H
+#ifndef CHARACTERWIZARD_H
+#define CHARACTERWIZARD_H
+#include <iostream>
+#include <string>
+#include "InputValidation.h"
 #include "Character.h"
 
 class Wizard : public Character
@@ -19,7 +22,7 @@ Wizard::Wizard(string _name) : Character(_name)
 
 int Wizard::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Sword Swing\n2) M4A1S (Gun)", 2);
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Kick\n2) Fireball", 2);
     int damage;
     if (attackOption == 1)
     {
@@ -34,22 +37,30 @@ int Wizard::attack()
 
 int Wizard::kick()
 {
-    if (stamina > 5)
+    int attackStaminaUse = 5;
+    int attackDamage = 10;
+    int attackCritGain = 1;
+    cout << name << " Used A Kick!\nIt Did " << attackDamage << " Damage\n\n";
+    if (stamina >= attackStaminaUse)
     {
-        addCrit(1);
-        stamina -= 5;
-        return 10;
+        addCrit(attackCritGain);
+        stamina -= attackStaminaUse;
+        return attackDamage;
     }
     return -1;
 }
 
 int Wizard::fireball()
 {
-    if (stamina > 20 && crit > 2)
+    int attackStaminaUse = 20;
+    int attackDamage = 30;
+    int attackCritUse = 2;
+    cout << name << " Cast A Fireball!\nIt Did " << attackDamage << " Damage\n\n";
+    if (stamina >= attackStaminaUse && crit >= attackCritUse)
     {
-        removeCrit(2);
-        stamina -= 20;
-        return 30;
+        removeCrit(attackCritUse);
+        stamina -= attackStaminaUse;
+        return attackDamage;
     }
     return -1; // error
 }

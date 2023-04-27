@@ -1,5 +1,7 @@
-#ifndef CHARCTERWARRIOR_H
-#define CHARCTERWARRIOR_H
+#ifndef CHARACTERWARRIOR_H
+#define CHARACTERWARRIOR_H
+#include <iostream>
+#include <string>
 #include "InputValidation.h"
 #include "Character.h"
 
@@ -35,22 +37,30 @@ int Warrior::attack()
 
 int Warrior::swordSwing()
 {
-    if (stamina > 5)
+    int attackStaminaUse = 5;
+    int attackDamage = 10;
+    int attackCritGain = 1;
+    cout << name << " Used A Sword!\nIt Did " << attackDamage << " Damage\n\n";
+    if (stamina >= attackStaminaUse)
     {
-        addCrit(1);
-        stamina -= 5;
-        return 10;
+        addCrit(attackCritGain);
+        stamina -= attackStaminaUse;
+        return attackDamage;
     }
     return -1;
 }
 
 int Warrior::M4A1S()
 {
-    if (stamina > 20 && crit > 2)
+    int attackStaminaUse = 20;
+    int attackDamage = 30;
+    int attackCritUse = 2;
+    cout << name << " Used A Gun!\nIt Did " << attackDamage << " Damage\n\n";
+    if (stamina >= attackStaminaUse && crit >= attackCritUse)
     {
-        removeCrit(2);
-        stamina -= 20;
-        return 30;
+        removeCrit(attackCritUse);
+        stamina -= attackStaminaUse;
+        return attackDamage;
     }
     return -1; // error
 }
