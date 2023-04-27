@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <stdio.h>
 #include "InputValidation.h"
 #include "Character.h"
 #include "CharacterWarrior.h"
@@ -13,10 +14,13 @@ class Game
 private:
     // bool run = true;
     // bool battle = false;
+    string OS;
     Character *players[2];
 
 public:
     Game();
+    void SetOS();
+    void ClearT();
     void SequelOptions();
     void MakeNewGame();
     void LoadOldGame();
@@ -27,6 +31,7 @@ public:
 
 Game::Game()
 {
+    SetOS();
     cout << "Welcome To My RPG Game By Selman\n";
     int choice = intReturnPrompt(" 1) Start New Game\n 2) Load Old Game\n 3) Quit And Save Game \n 4) Quit Game", 4);
     if (choice == 1)
@@ -44,6 +49,31 @@ Game::Game()
     if (choice == 4)
     {
         End();
+    }
+}
+
+void Game::SetOS()
+{
+#if __APPLE__
+    OS = "APPLE";
+#endif
+
+#if _WIN32
+    OS = "WIN";
+#endif
+}
+
+void Game::ClearT()
+{
+    if (OS == "APPLE")
+    {
+        system("cls");
+        return;
+    }
+    if (OS == "WIN")
+    {
+        system("clear");
+        return;
     }
 }
 
@@ -146,13 +176,13 @@ void Game::LoadOldGame()
 
 void Game::MakeNewGame()
 {
-    system("clear");
+    ClearT();
     string player1Name = stringReturnPrompt("Enter Player 1 Name");
     string player2Name = stringReturnPrompt("Enter Player 2 Name");
     int player1Choice = intReturnPrompt("Select A Character For " + player1Name + " \n1) Wizard\n2) Warrior\n3) Archer", 3);
-    system("clear");
+    ClearT();
     int player2Choice = intReturnPrompt("Select A Character For " + player2Name + " \n1) Wizard\n2) Warrior\n3) Archer", 3);
-    system("clear");
+    ClearT();
 
     if (player1Choice == 1)
     {
@@ -184,7 +214,7 @@ void Game::BattleRun()
     int damage;
     while (players[0]->isAlive() && players[1]->isAlive())
     {
-        system("clear");
+        ClearT();
         players[0]->printStats();
         players[1]->printStats();
 
