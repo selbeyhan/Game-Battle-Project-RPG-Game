@@ -8,9 +8,9 @@ class Warrior : public Character
 public:
     Warrior(string _name);
     int attack() override;
+    void setAll(int info[]) override;
     int swordSwing();
     int M4A1S();
-    void setAll(int info[]) override;
 };
 
 Warrior::Warrior(string _name) : Character(_name)
@@ -37,7 +37,7 @@ int Warrior::swordSwing()
 {
     if (stamina > 5)
     {
-        AddXp(1);
+        addCrit(1);
         stamina -= 5;
         return 10;
     }
@@ -46,22 +46,18 @@ int Warrior::swordSwing()
 
 int Warrior::M4A1S()
 {
-    if (stamina > 20 && level > 1)
+    if (stamina > 20 && crit > 2)
     {
+        removeCrit(2);
         stamina -= 20;
         return 30;
     }
-    return -1;
+    return -1; // error
 }
 
 void Warrior::setAll(int info[])
 {
-    health = info[1];
-    maxHealth = info[2];
-    stamina = info[3];
-    maxStamina = info[4];
-    level = info[5];
-    XP = info[6];
-    maxXP = info[7];
+    Character::setAll(info);
 }
+
 #endif

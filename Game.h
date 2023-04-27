@@ -71,7 +71,6 @@ void Game::LoadOldGame()
 
     for (unsigned int i = 0; i < SIZE; i++)
     {
-        file.ignore();
         file >> temp;
         characterInfo1[i] = temp;
     }
@@ -80,7 +79,6 @@ void Game::LoadOldGame()
 
     for (unsigned int i = 0; i < SIZE; i++)
     {
-        file.ignore();
         file >> temp;
         characterInfo2[i] = temp;
     }
@@ -170,6 +168,11 @@ void Game::BattleRun()
 
 void Game::End()
 {
+    // for (int i = 0; i < 2; i++)
+    // {
+    //     delete players[i];
+    // }
+    // delete[] players;
     cout << "Thank you for playing!"; // add art
 }
 

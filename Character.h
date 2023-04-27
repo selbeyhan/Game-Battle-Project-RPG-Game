@@ -8,34 +8,39 @@ class Character
 {
 protected:
     string type;
-    bool alive = true;
+    bool alive;
     string name;
-    int level = 0;
     int maxHealth = 100;
     int maxStamina = 100;
-    int health = maxHealth;
-    int stamina = maxStamina;
-    int XP = 0;
-    int maxXP = 10;
+    int maxCrit = 10;
+    int health;
+    int stamina;
+    int crit;
 
 public:
-    // -----
     Character(string _name);
     virtual void printStats();
     void setCharacterName(string setName);
     string getName();
     void Resting(int addHealth, int addStamina);
     void HealthItem(int addHealth, int addStamina);
-    void AddXp(int addXp); // think about linear (same xp for each level )or progressive (more xp for every level)
+    void addCrit(int _crit);
+    void removeCrit(int _crit);
     void takeDamage(int damage);
     virtual int attack() = 0;
-    // setters
-    virtual void setAll(int info[]) = 0;
+    virtual void setAll(int info[]);
 };
 
 Character::Character(string _name)
 {
     name = _name;
+    alive = true;
+    maxHealth = 100;
+    maxStamina = 100;
+    maxCrit = 10;
+    health = maxHealth;
+    stamina = maxStamina;
+    crit = 0;
 }
 
 void Character::printStats()
@@ -43,8 +48,7 @@ void Character::printStats()
     cout << name << " " << type << endl;
     cout << "Health: " << health << "/" << maxHealth << endl;
     cout << "Stamina: " << stamina << "/" << maxStamina << endl;
-    cout << "Level: " << level << endl;
-    cout << "XP: " << XP << "/" << maxXP << "\n\n";
+    cout << "Crit: " << crit << "/" << maxCrit << endl;
 }
 
 void Character::setCharacterName(string setName)
@@ -79,19 +83,26 @@ void Character::HealthItem(int addHealth, int addStamina)
 }
 
 // think about linear (same xp for each level )or progressive (more xp for every level)
-void Character::AddXp(int addXp)
+void Character::addCrit(int _crit)
 {
-    if (XP + addXp > maxXP)
+    if (crit + _crit > maxCrit)
     {
-        // Increase level, MaxXP, Health, MaxHealth, Stamina, MaxStamina
-        level += 1;
-        maxXP += 1;
-        XP = (XP + addXp - maxXP);
-
+        crit = maxCrit;
         return;
     }
-    XP += addXp;
+    crit += _crit;
 }
+
+void Character::removeCrit(int _crit)
+{
+    if (crit - _crit >= 0)
+    {
+        crit -= _crit;
+        return;
+    }
+    crit = 0; // if error occured then it'll be set to 0
+}
+
 void Character::takeDamage(int damage)
 {
     if (health - damage < 0)
@@ -102,6 +113,16 @@ void Character::takeDamage(int damage)
     }
 
     health -= damage;
+}
+
+void Character::setAll(int info[])
+{
+    health = info[1];
+    maxHealth = info[2];
+    stamina = info[3];
+    maxStamina = info[4];
+    crit = info[5];
+    maxCrit = info[6];
 }
 
 #endif

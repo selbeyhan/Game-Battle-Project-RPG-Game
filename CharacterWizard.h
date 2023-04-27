@@ -7,9 +7,9 @@ class Wizard : public Character
 public:
     Wizard(string _name);
     int attack() override;
+    void setAll(int info[]) override;
     int kick();
     int fireball();
-    void setAll(int info[]) override;
 };
 
 Wizard::Wizard(string _name) : Character(_name)
@@ -36,7 +36,7 @@ int Wizard::kick()
 {
     if (stamina > 5)
     {
-        AddXp(1);
+        addCrit(1);
         stamina -= 5;
         return 10;
     }
@@ -45,23 +45,18 @@ int Wizard::kick()
 
 int Wizard::fireball()
 {
-    if (stamina > 20 && level >= 1)
+    if (stamina > 20 && crit > 2)
     {
+        removeCrit(2);
         stamina -= 20;
         return 30;
     }
-    return -1;
+    return -1; // error
 }
 
 void Wizard::setAll(int info[])
 {
-    health = info[1];
-    maxHealth = info[2];
-    stamina = info[3];
-    maxStamina = info[4];
-    level = info[5];
-    XP = info[6];
-    maxXP = info[7];
+    Character::setAll(info);
 }
 
 #endif
