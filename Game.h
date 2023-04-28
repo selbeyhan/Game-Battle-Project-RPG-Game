@@ -32,6 +32,7 @@ public:
 Game::Game()
 {
     SetOS();
+    ClearT();
     cout << "Welcome To My RPG Game By Selman\n";
     int choice = intReturnPrompt(" 1) Start New Game\n 2) Load Old Game\n 3) Quit And Save Game \n 4) Quit Game", 4);
     if (choice == 1)
@@ -67,12 +68,12 @@ void Game::ClearT()
 {
     if (OS == "APPLE")
     {
-        system("cls");
+        system("clear");
         return;
     }
     if (OS == "WIN")
     {
-        system("clear");
+        system("cls");
         return;
     }
 }
@@ -178,7 +179,9 @@ void Game::MakeNewGame()
 {
     ClearT();
     string player1Name = stringReturnPrompt("Enter Player 1 Name");
+    ClearT();
     string player2Name = stringReturnPrompt("Enter Player 2 Name");
+    ClearT();
     int player1Choice = intReturnPrompt("Select A Character For " + player1Name + " \n1) Wizard\n2) Warrior\n3) Archer", 3);
     ClearT();
     int player2Choice = intReturnPrompt("Select A Character For " + player2Name + " \n1) Wizard\n2) Warrior\n3) Archer", 3);
@@ -242,6 +245,7 @@ void Game::saveGame()
     }
 
     // start saving
+    cout << "Not Implemented saving";
 }
 
 void Game::End()

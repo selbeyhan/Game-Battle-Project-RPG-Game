@@ -13,6 +13,16 @@ public:
     void setAll(int info[]) override;
     int swordSwing();
     int M4A1S();
+
+private:
+    // Sword
+    int SwordStamina = 5;
+    int SwordDamage = 10;
+    int SwordCrit = 1;
+    // M4A1S
+    int M4A1SStamina = 20;
+    int M4A1SDamage = 30;
+    int M4A1SCrit = 2;
 };
 
 Warrior::Warrior(string _name) : Character(_name)
@@ -22,7 +32,7 @@ Warrior::Warrior(string _name) : Character(_name)
 
 int Warrior::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Sword Swing\n2) M4A1S (Gun)", 2);
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Sword Swing (" + SwordDamage + "Damage)\n2) M4A1S (Gun)", 2);
     int damage;
     if (attackOption == 1)
     {
@@ -37,30 +47,22 @@ int Warrior::attack()
 
 int Warrior::swordSwing()
 {
-    int attackStaminaUse = 5;
-    int attackDamage = 10;
-    int attackCritGain = 1;
-    cout << name << " Used A Sword!\nIt Did " << attackDamage << " Damage\n\n";
-    if (stamina >= attackStaminaUse)
+    if (stamina >= SwordStamina)
     {
-        addCrit(attackCritGain);
-        stamina -= attackStaminaUse;
-        return attackDamage;
+        addCrit(SwordCrit);
+        stamina -= SwordStamina;
+        return SwordDamage;
     }
     return -1;
 }
 
 int Warrior::M4A1S()
 {
-    int attackStaminaUse = 20;
-    int attackDamage = 30;
-    int attackCritUse = 2;
-    cout << name << " Used A Gun!\nIt Did " << attackDamage << " Damage\n\n";
-    if (stamina >= attackStaminaUse && crit >= attackCritUse)
+    if (stamina >= M4A1SStamina && crit >= M4A1SCrit)
     {
-        removeCrit(attackCritUse);
-        stamina -= attackStaminaUse;
-        return attackDamage;
+        removeCrit(M4A1SCrit);
+        stamina -= M4A1SStamina;
+        return M4A1SDamage;
     }
     return -1; // error
 }
