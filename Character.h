@@ -7,17 +7,6 @@ using namespace std;
 
 class Character
 {
-protected:
-    string type;
-    bool alive;
-    string name;
-    int maxHealth;
-    int maxStamina;
-    int maxCrit;
-    int health;
-    int stamina;
-    int crit;
-
 public:
     Character(string _name);
     virtual void printStats();
@@ -31,7 +20,19 @@ public:
     bool isAlive() { return alive; };
     virtual int attack() = 0;
     virtual void setAll(int info[]);
+    virtual int BasicAttackInfo(string AttackName) = 0;
     string getAllInfo();
+
+protected:
+    string type;
+    bool alive;
+    string name;
+    int maxHealth;
+    int maxStamina;
+    int maxCrit;
+    int health;
+    int stamina;
+    int crit;
 };
 
 Character::Character(string _name)
@@ -130,7 +131,20 @@ void Character::setAll(int info[])
 
 string Character::getAllInfo()
 {
-    string data = "Name: " + name + "\nType: " + type + "\nHealth: " + to_string(health) + "\nMaxHealth: " + to_string(maxHealth) + "\nStamina: " + to_string(stamina) + "\nMaxStamina: " + to_string(maxStamina) + "\nCrit: " + to_string(crit) + "\nMaxCrit: " + to_string(maxCrit) + "\n";
+    int typeReplacement;
+    if (type == "Wizard")
+    {
+        typeReplacement = 1;
+    }
+    if (type == "Warrior")
+    {
+        typeReplacement = 1;
+    }
+    if (type == "Archer")
+    {
+        typeReplacement = 3;
+    }
+    string data = "Name: " + name + "\nType: " + to_string(typeReplacement) + "\nHealth: " + to_string(health) + "\nMaxHealth: " + to_string(maxHealth) + "\nStamina: " + to_string(stamina) + "\nMaxStamina: " + to_string(maxStamina) + "\nCrit: " + to_string(crit) + "\nMaxCrit: " + to_string(maxCrit) + "\n";
     return data;
 }
 

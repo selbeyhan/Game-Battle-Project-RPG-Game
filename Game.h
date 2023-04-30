@@ -34,7 +34,7 @@ Game::Game()
     SetOS();
     ClearT();
     cout << "Welcome To My RPG Game By Selman\n";
-    int choice = intReturnPrompt(" 1) Start New Game\n 2) Load Old Game\n 3) Quit And Save Game \n 4) Quit Game", 4);
+    int choice = intReturnPrompt(" 1) Start New Game\n 2) Load Old Game\n 3) Quit Game", 3);
     if (choice == 1)
     {
         MakeNewGame();
@@ -42,10 +42,6 @@ Game::Game()
     if (choice == 2)
     {
         LoadOldGame();
-    }
-    if (choice == 3)
-    {
-        saveGame();
     }
     if (choice == 4)
     {
@@ -88,7 +84,6 @@ void Game::SequelOptions()
     if (choice == 2)
     {
         saveGame();
-        End();
     }
     if (choice == 3)
     {
@@ -232,11 +227,19 @@ void Game::BattleRun()
             players[1]->takeDamage(damage);
         }
 
+        ClearT();
+        players[0]->printStats();
+        players[1]->printStats();
+
         damage = players[1]->attack();
         if (damage >= 0)
         {
             players[0]->takeDamage(damage);
         }
+
+        ClearT();
+        players[0]->printStats();
+        players[1]->printStats();
 
         quit = intReturnPrompt("Continue Or Quit Battle\n1) Continue\n2) Quit Battle", 2);
         if (quit == 2)

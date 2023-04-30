@@ -7,6 +7,14 @@
 
 class Wizard : public Character
 {
+public:
+    Wizard(string _name);
+    int attack() override;
+    void setAll(int info[]) override;
+    int kick();
+    int fireball();
+    int BasicAttackInfo(string AttackName);
+
 private:
     // Kick
     int KickStamina = 5;
@@ -16,13 +24,6 @@ private:
     int FireballStamina = 20;
     int FireballDamage = 30;
     int FireballCrit = 2;
-
-public:
-    Wizard(string _name);
-    int attack() override;
-    void setAll(int info[]) override;
-    int kick();
-    int fireball();
 };
 
 Wizard::Wizard(string _name) : Character(_name)
@@ -32,7 +33,7 @@ Wizard::Wizard(string _name) : Character(_name)
 
 int Wizard::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Kick (" + to_string(KickDamage) + " Damage)\n2) Fireball (" + to_string(FireballDamage) + " Damage, Requires " + to_string(FireballCrit) + " Crit)", 2);
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Kick (" + to_string(KickDamage) + " Damage, " + to_string(KickStamina) + " Stamina)\n2) Fireball (" + to_string(FireballDamage) + " Damage, " + to_string(FireballStamina) + " Stamina, Requires " + to_string(FireballCrit) + " Crit)", 2);
     int damage;
     if (attackOption == 1)
     {
