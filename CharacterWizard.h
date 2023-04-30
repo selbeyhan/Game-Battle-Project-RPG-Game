@@ -7,6 +7,16 @@
 
 class Wizard : public Character
 {
+private:
+    // Kick
+    int KickStamina = 5;
+    int KickDamage = 10;
+    int KickCrit = 1;
+    // Fireball
+    int FireballStamina = 20;
+    int FireballDamage = 30;
+    int FireballCrit = 2;
+
 public:
     Wizard(string _name);
     int attack() override;
@@ -22,7 +32,7 @@ Wizard::Wizard(string _name) : Character(_name)
 
 int Wizard::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Kick\n2) Fireball", 2);
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Kick (" + to_string(KickDamage) + " Damage)\n2) Fireball (" + to_string(FireballDamage) + " Damage, Requires " + to_string(FireballCrit) + " Crit)", 2);
     int damage;
     if (attackOption == 1)
     {
@@ -37,30 +47,22 @@ int Wizard::attack()
 
 int Wizard::kick()
 {
-    int attackStaminaUse = 5;
-    int attackDamage = 10;
-    int attackCritGain = 1;
-    cout << name << " Used A Kick!\nIt Did " << attackDamage << " Damage\n\n";
-    if (stamina >= attackStaminaUse)
+    if (stamina >= KickStamina)
     {
-        addCrit(attackCritGain);
-        stamina -= attackStaminaUse;
-        return attackDamage;
+        addCrit(KickCrit);
+        stamina -= KickStamina;
+        return KickDamage;
     }
     return -1;
 }
 
 int Wizard::fireball()
 {
-    int attackStaminaUse = 20;
-    int attackDamage = 30;
-    int attackCritUse = 2;
-    cout << name << " Cast A Fireball!\nIt Did " << attackDamage << " Damage\n\n";
-    if (stamina >= attackStaminaUse && crit >= attackCritUse)
+    if (stamina >= FireballStamina && crit >= FireballCrit)
     {
-        removeCrit(attackCritUse);
-        stamina -= attackStaminaUse;
-        return attackDamage;
+        removeCrit(FireballCrit);
+        stamina -= FireballStamina;
+        return FireballDamage;
     }
     return -1; // error
 }

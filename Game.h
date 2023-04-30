@@ -81,12 +81,16 @@ void Game::ClearT()
 void Game::SequelOptions()
 {
     int choice = intReturnPrompt(" 1) Battle\n 2) Quit And Save Game \n 3) Quit Game", 3);
-
     if (choice == 1)
     {
         BattleRun();
     }
     if (choice == 2)
+    {
+        saveGame();
+        End();
+    }
+    if (choice == 3)
     {
         End();
     }
@@ -94,7 +98,7 @@ void Game::SequelOptions()
 
 void Game::LoadOldGame()
 {
-    string fileName = stringReturnPrompt("Enter File Name");
+    string fileName = stringReturnPrompt("Enter File Name (Inlucude .txt)");
     ifstream file(fileName);
 
     //  do the checking if it opens or fails or sum
@@ -171,7 +175,7 @@ void Game::LoadOldGame()
     */
 
     cout << "Load Successful\n\n"
-         << Name1 << " vs. " << Name2;
+         << Name1 << " vs. " << Name2 << endl;
     SequelOptions();
 }
 
@@ -215,6 +219,7 @@ void Game::MakeNewGame()
 void Game::BattleRun()
 {
     int damage;
+    int quit;
     while (players[0]->isAlive() && players[1]->isAlive())
     {
         ClearT();
@@ -232,7 +237,14 @@ void Game::BattleRun()
         {
             players[0]->takeDamage(damage);
         }
+
+        quit = intReturnPrompt("Continue Or Quit Battle\n1) Continue\n2) Quit Battle", 2);
+        if (quit == 2)
+        {
+            break;
+        }
     }
+    SequelOptions();
 }
 
 void Game::saveGame()
@@ -245,7 +257,14 @@ void Game::saveGame()
     }
 
     // start saving
-    cout << "Not Implemented saving";
+    ofstream file(saveLocation);
+    if (!file.is_open())
+    {
+        cout << "Failed To Open Save Location";
+        return;
+    }
+    file << players[0]->getAllInfo() << players[1]->getAllInfo();
+    file.close();
 }
 
 void Game::End()

@@ -32,7 +32,7 @@ Warrior::Warrior(string _name) : Character(_name)
 
 int Warrior::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Sword Swing (" + SwordDamage + "Damage)\n2) M4A1S (Gun)", 2);
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Sword Swing (" + to_string(SwordDamage) + " Damage)\n2) M4 (" + to_string(M4A1SDamage) + " Damage, Requires " + to_string(M4A1SCrit) + " Crit)", 2);
     int damage;
     if (attackOption == 1)
     {

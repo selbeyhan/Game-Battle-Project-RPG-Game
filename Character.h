@@ -31,6 +31,7 @@ public:
     bool isAlive() { return alive; };
     virtual int attack() = 0;
     virtual void setAll(int info[]);
+    string getAllInfo();
 };
 
 Character::Character(string _name)
@@ -125,6 +126,12 @@ void Character::setAll(int info[])
     maxStamina = info[4];
     crit = info[5];
     maxCrit = info[6];
+}
+
+string Character::getAllInfo()
+{
+    string data = "Name: " + name + "\nType: " + type + "\nHealth: " + to_string(health) + "\nMaxHealth: " + to_string(maxHealth) + "\nStamina: " + to_string(stamina) + "\nMaxStamina: " + to_string(maxStamina) + "\nCrit: " + to_string(crit) + "\nMaxCrit: " + to_string(maxCrit) + "\n";
+    return data;
 }
 
 #endif
