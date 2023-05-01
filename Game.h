@@ -26,6 +26,7 @@ public:
     void LoadOldGame();
     void BattleRun();
     void saveGame();
+    void Win();
     void End();
 };
 

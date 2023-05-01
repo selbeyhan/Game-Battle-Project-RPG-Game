@@ -13,7 +13,7 @@ public:
     void setAll(int info[]) override;
     int swordSwing();
     int M4A1S();
-    int BasicAttackInfo(string AttackName);
+    string BasicAttackInfo(int AttackName);
 
 private:
     // Sword
@@ -33,7 +33,7 @@ Warrior::Warrior(string _name) : Character(_name)
 
 int Warrior::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) Sword Swing (" + to_string(SwordDamage) + " Damage, " + to_string(SwordStamina) + " Stamina)\n2) M4 (" + to_string(M4A1SDamage) + " Damage, " + to_string(M4A1SStamina) + " Stamina, Requires " + to_string(M4A1SCrit) + " Crit)", 2);
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) " + BasicAttackInfo(1) + "\n2) " + BasicAttackInfo(2), 2);
     int damage;
     if (attackOption == 1)
     {
@@ -73,4 +73,18 @@ void Warrior::setAll(int info[])
     Character::setAll(info);
 }
 
+string Warrior::BasicAttackInfo(int AttackName)
+{
+    string temp;
+    if (AttackName == 1)
+    {
+        temp = "Sword Swing (" + to_string(SwordDamage) + " Damage, " + to_string(SwordStamina) + " Stamina)";
+    }
+    if (AttackName == 2)
+    {
+        temp = "M4 (" + to_string(M4A1SDamage) + " Damage, " + to_string(M4A1SStamina) + " Stamina, Requires " + to_string(M4A1SCrit) + " Crit)";
+    }
+
+    return temp;
+}
 #endif
