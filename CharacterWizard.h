@@ -13,7 +13,7 @@ public:
     void setAll(int info[]) override;
     int kick();
     int fireball();
-    string BasicAttackInfo(int AttackName);
+    string AttackInfo(int AttackName);
 
 private:
     // Kick
@@ -33,7 +33,7 @@ Wizard::Wizard(string _name) : Character(_name)
 
 int Wizard::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) " + BasicAttackInfo(1) + "\n2) " + BasicAttackInfo(2), 2);
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) " + AttackInfo(1) + "\n2) " + AttackInfo(2), 2);
     int damage;
     if (attackOption == 1)
     {
@@ -73,7 +73,7 @@ void Wizard::setAll(int info[])
     Character::setAll(info);
 }
 
-string Wizard::BasicAttackInfo(int AttackName)
+string Wizard::AttackInfo(int AttackName)
 {
     string temp;
     if (AttackName == 1)

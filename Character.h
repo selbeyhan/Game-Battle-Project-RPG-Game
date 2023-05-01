@@ -20,7 +20,7 @@ public:
     bool isAlive() { return alive; };
     virtual int attack() = 0;
     virtual void setAll(int info[]);
-    virtual string BasicAttackInfo(int AttackName) = 0;
+    virtual string AttackInfo(int AttackName) = 0;
     string getAllInfo();
 
 protected:

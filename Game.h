@@ -26,7 +26,7 @@ public:
     void LoadOldGame();
     void BattleRun();
     void saveGame();
-    void Win();
+    void Winner();
     void End();
 };
 
@@ -94,6 +94,7 @@ void Game::SequelOptions()
 
 void Game::LoadOldGame()
 {
+    ClearT();
     string fileName = stringReturnPrompt("Enter File Name (Inlucude .txt)");
     ifstream file(fileName);
 
@@ -169,7 +170,7 @@ void Game::LoadOldGame()
         players[1]->setAll(characterInfo2);
     }
     */
-
+    ClearT();
     cout << "Load Successful\n\n"
          << Name1 << " vs. " << Name2 << endl;
     SequelOptions();
@@ -222,22 +223,32 @@ void Game::BattleRun()
         players[0]->printStats();
         players[1]->printStats();
 
+        // Player 1 Attacks
         damage = players[0]->attack();
         if (damage >= 0)
         {
             players[1]->takeDamage(damage);
         }
-
+        // If Player 2 Dies, Winner Gets Called And Breaks Loop
+        if (!players[1]->isAlive())
+        {
+            break;
+        }
         ClearT();
         players[0]->printStats();
         players[1]->printStats();
 
+        // Player 2 Attacks
         damage = players[1]->attack();
         if (damage >= 0)
         {
             players[0]->takeDamage(damage);
         }
-
+        // If Player 1 Dies, Winner Gets Called And Breaks Loop
+        if (!players[0]->isAlive())
+        {
+            break;
+        }
         ClearT();
         players[0]->printStats();
         players[1]->printStats();
@@ -248,6 +259,8 @@ void Game::BattleRun()
             break;
         }
     }
+
+    Winner();
     SequelOptions();
 }
 
@@ -269,6 +282,19 @@ void Game::saveGame()
     }
     file << players[0]->getAllInfo() << players[1]->getAllInfo();
     file.close();
+}
+
+void Game::Winner()
+{
+    ClearT();
+    players[0]->printStats();
+    players[1]->printStats();
+    if (!players[0]->isAlive())
+    {
+        cout << "The Winner Is " << players[1]->getName() << "!\n";
+        return;
+    }
+    cout << "The Winner Is " << players[0]->getName() << "!\n";
 }
 
 void Game::End()
