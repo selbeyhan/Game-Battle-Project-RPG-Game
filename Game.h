@@ -8,12 +8,11 @@
 #include "Character.h"
 #include "CharacterWarrior.h"
 #include "CharacterWizard.h"
+#include "CharacterArcher.h"
 using namespace std;
 class Game
 {
 private:
-    // bool run = true;
-    // bool battle = false;
     string OS;
     Character *players[2];
 
@@ -146,12 +145,12 @@ void Game::LoadOldGame()
         players[0] = new Warrior(Name1);
         players[0]->setAll(characterInfo1);
     }
-    /*
-    if (characterInfo1[0] == 3) {
+
+    if (characterInfo1[0] == 3)
+    {
         players[0] = new Archer(Name1);
         players[0]->setAll(characterInfo1);
     }
-    */
 
     // Player 2
     if (characterInfo2[0] == 1)
@@ -164,12 +163,12 @@ void Game::LoadOldGame()
         players[1] = new Warrior(Name2);
         players[1]->setAll(characterInfo2);
     }
-    /*
-    if (characterInfo2[0] == 3) {
+
+    if (characterInfo2[0] == 3)
+    {
         players[1] = new Archer(Name1);
         players[1]->setAll(characterInfo2);
     }
-    */
     ClearT();
     cout << "Load Successful\n\n"
          << Name1 << " vs. " << Name2 << endl;
@@ -198,6 +197,11 @@ void Game::MakeNewGame()
         Warrior *player1 = new Warrior(player1Name);
         players[0] = player1;
     }
+    else if (player1Choice == 3)
+    {
+        Archer *player1 = new Archer(player1Name);
+        players[0] = player1;
+    }
 
     if (player2Choice == 1)
     {
@@ -207,6 +211,11 @@ void Game::MakeNewGame()
     else if (player2Choice == 2)
     {
         Warrior *player2 = new Warrior(player2Name);
+        players[1] = player2;
+    }
+    else if (player2Choice == 3)
+    {
+        Archer *player2 = new Archer(player2Name);
         players[1] = player2;
     }
 
