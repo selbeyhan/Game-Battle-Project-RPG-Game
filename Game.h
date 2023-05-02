@@ -261,7 +261,7 @@ void Game::BattleRun()
     }
 
     Winner();
-    SequelOptions();
+    End();
 }
 
 void Game::saveGame()
@@ -299,12 +299,7 @@ void Game::Winner()
 
 void Game::End()
 {
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     delete players[i];
-    // }
-    // delete[] players;
-    cout << "Thank you for playing!"; // add art
+    cout << "Thank you for playing!";
 }
 
 #endif

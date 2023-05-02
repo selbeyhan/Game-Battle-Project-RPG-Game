@@ -12,6 +12,7 @@ public:
     int attack() override;
     void setAll(int info[]) override;
     int kick();
+    int Staff();
     int fireball();
     string AttackInfo(int AttackName);
 
@@ -20,10 +21,14 @@ private:
     int KickStamina = 5;
     int KickDamage = 10;
     int KickCrit = 1;
+    // Staff Wack
+    int StaffStamina = 10;
+    int StaffDamage = 20;
+    int StaffCrit = 2;
     // Fireball
-    int FireballStamina = 20;
-    int FireballDamage = 30;
-    int FireballCrit = 2;
+    int FireballStamina = 15;
+    int FireballDamage = 35;
+    int FireballCrit = 4;
 };
 
 Wizard::Wizard(string _name) : Character(_name)
@@ -33,15 +38,23 @@ Wizard::Wizard(string _name) : Character(_name)
 
 int Wizard::attack()
 {
-    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) " + AttackInfo(1) + "\n2) " + AttackInfo(2), 2);
     int damage;
+    int attackOption = intReturnPrompt("Select An Attack (" + name + ")\n1) " + AttackInfo(1) + "\n2) " + AttackInfo(2) + "\n3) " + AttackInfo(3) + "\n4) Rest (Gives 10 Stamina)", 4);
     if (attackOption == 1)
     {
         damage = kick();
     }
     if (attackOption == 2)
     {
+        damage = Staff();
+    }
+    if (attackOption == 3)
+    {
         damage = fireball();
+    }
+    if (attackOption == 4)
+    {
+        Resting(10);
     }
     return damage;
 }
@@ -55,6 +68,17 @@ int Wizard::kick()
         return KickDamage;
     }
     return -1;
+}
+
+int Wizard::Staff()
+{
+    if (stamina >= StaffStamina && crit >= StaffCrit)
+    {
+        removeCrit(StaffCrit);
+        stamina -= StaffStamina;
+        return StaffDamage;
+    }
+    return -1; // error
 }
 
 int Wizard::fireball()
@@ -81,6 +105,10 @@ string Wizard::AttackInfo(int AttackName)
         temp = "Kick (" + to_string(KickDamage) + " Damage, " + to_string(KickStamina) + " Stamina)";
     }
     if (AttackName == 2)
+    {
+        temp = "Staff Wack (" + to_string(StaffDamage) + " Damage, " + to_string(StaffStamina) + " Stamina, Requires " + to_string(StaffCrit) + " Crit)";
+    }
+    if (AttackName == 3)
     {
         temp = "Fireball (" + to_string(FireballDamage) + " Damage, " + to_string(FireballStamina) + " Stamina, Requires " + to_string(FireballCrit) + " Crit)";
     }

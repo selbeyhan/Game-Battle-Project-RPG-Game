@@ -12,8 +12,7 @@ public:
     virtual void printStats();
     void setCharacterName(string setName);
     string getName();
-    void Resting(int addHealth, int addStamina);
-    void HealthItem(int addHealth, int addStamina);
+    void Resting(int addStamina);
     void addCrit(int _crit);
     void removeCrit(int _crit);
     void takeDamage(int damage);
@@ -65,28 +64,16 @@ string Character::getName()
     return name;
 }
 
-void Character::Resting(int addHealth, int addStamina)
+void Character::Resting(int addStamina)
 {
-    if (health + addHealth > maxHealth)
-    {
-        health = maxHealth;
-        return;
-    }
-    health += addHealth;
-
-    if (stamina + addStamina > maxStamina)
+    if (stamina + addStamina >= maxStamina)
     {
         stamina = maxStamina;
+        return;
     }
     stamina += addStamina;
 }
 
-void Character::HealthItem(int addHealth, int addStamina)
-{
-    Resting(addHealth, addStamina); // dont know if this'll work
-}
-
-// think about linear (same xp for each level )or progressive (more xp for every level)
 void Character::addCrit(int _crit)
 {
     if (crit + _crit > maxCrit)

@@ -1,4 +1,4 @@
-Name: Selo
+Name: Selman
 Type: 1
 Health: 100
 MaxHealth: 100
@@ -6,7 +6,7 @@ Stamina: 100
 MaxStamina: 100
 Crit: 0
 MaxCrit: 10
-Name: Ahmy
+Name: Ahmet
 Type: 1
 Health: 100
 MaxHealth: 100
