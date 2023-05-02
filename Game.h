@@ -224,6 +224,7 @@ void Game::MakeNewGame()
 
 void Game::BattleRun()
 {
+    bool quitEarly = false;
     int damage;
     int quit;
     while (players[0]->isAlive() && players[1]->isAlive())
@@ -265,12 +266,16 @@ void Game::BattleRun()
         quit = intReturnPrompt("Continue Or Quit Battle\n1) Continue\n2) Quit Battle", 2);
         if (quit == 2)
         {
+            quitEarly = true;
             break;
         }
     }
-
-    Winner();
-    End();
+    if (!quitEarly)
+    {
+        Winner();
+        End();
+    }
+    SequelOptions();
 }
 
 void Game::saveGame()
